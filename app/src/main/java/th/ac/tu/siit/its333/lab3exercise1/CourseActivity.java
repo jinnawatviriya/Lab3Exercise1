@@ -4,16 +4,34 @@ import android.support.v7.app.ActionBarActivity;
 import android.os.Bundle;
 import android.view.Menu;
 import android.view.MenuItem;
-
+import android.view.View;
+import android.widget.EditText;
+import android.content.Intent;
+import android.widget.RadioButton;
+import android.widget.RadioGroup;
 
 public class CourseActivity extends ActionBarActivity {
+
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_course);
     }
+    public void button3(View v)
+    {
+        Intent res = new Intent();
+        EditText etCode = (EditText)findViewById(R.id.etCode);
+        EditText etCR = (EditText)findViewById(R.id.etCR);
+        RadioGroup rad01 = (RadioGroup)findViewById(R.id.Grade);
 
+        res.putExtra("addCourse",etCode.getText().toString());
+        res.putExtra("addCredit", Integer.parseInt(etCR.getText().toString()));
+        RadioButton radbtn = (RadioButton)findViewById(rad01.getCheckedRadioButtonId());
+        res.putExtra("addGrade",radbtn.getText().toString());
+        setResult(RESULT_OK, res);
+        finish();
+    }
 
     @Override
     public boolean onCreateOptionsMenu(Menu menu) {
